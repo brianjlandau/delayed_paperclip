@@ -48,7 +48,7 @@ module DelayedPaperclip
         if instance.respond_to?(:"#{name}_processing?")
           instance.send("#{name}_processing=", false)
 
-          instance.class.update_all({ "#{name}_processing" => false, "#{name}_updated_at" => Time.at(self.updated_at) }, instance.class.primary_key => instance.id)
+          instance.class.unscoped.update_all({ "#{name}_processing" => false, "#{name}_updated_at" => Time.at(self.updated_at) }, instance.class.primary_key => instance.id)
         end
       end
 
